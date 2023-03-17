@@ -1,20 +1,14 @@
--- config block to change from view to tables as per the below config (double underscore will prompt config)
+-- config block to change from view to tables as per the below config (double
+-- underscore will prompt config)
+{{ config(materialized="table") }}
 
-{{
-    config(
-        materialized='table'
-    )
-}}
-
-
+-- referencing the model from stg_customers.sql by referencing the informations .
+-- Previous info available in customers.sql
 with
-    customers as (
-        select id as customerid, first_name, last_name from raw.jaffle_shop.customers
-    ),
-    orders as (
-        select id as orderid, user_id as customerid, order_date, status
-        from raw.jaffle_shop.orders
-    ),
+    customers as (select * from {{ ref("stg_customers") }}),
+
+    orders as (select * from {{ ref("stg_orders") }}),
+
     customer_orders as (
         select
             customerid,
