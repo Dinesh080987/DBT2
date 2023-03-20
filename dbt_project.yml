@@ -2,7 +2,8 @@
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'my_new_project'
+#name: 'my_new_project' renaming name to jaffle_shop
+name: 'jaffle_Shop'
 version: '1.0.0'
 config-version: 2
 
@@ -32,7 +33,13 @@ clean-targets:         # directories to be removed by `dbt clean`
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
-  my_new_project:
-    # Applies to all files under models/example/
-    example:
-      materialized: view
+  #my_new_project: renaming the project name as mentioned above
+  jaffle_shop:
+    marts:
+      core:
+        +materialized: table
+    staging:
+      +materialized: view
+    # Applies to all files under models/example/ 
+  # example: -- This is example for example folder which got deleted now we will write for actual folder as above
+  #   materialized: view
